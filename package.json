@@ -1,8 +1,8 @@
 {
   "name": "simplecheck",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple variable type checker modeled after Meteor's check function",
-  "main": "lib/check.js",
+  "main": "lib/simplecheck.js",
   "scripts": {
     "test": "mocha --compilers js:babel/register --recursive lib/**/*_test.js",
     "test-cover":"node_modules/.bin/istanbul cover _mocha -- --compilers js:babel/register --recursive lib/**/*_test.js",

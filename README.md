@@ -12,28 +12,28 @@ I love Meteor's `check` function but you can't use it outside of Meteor due to t
 ### Import the library
 
 ```js
-import check, {oneOf, optional, ensure} from 'simplecheck';
+import {matches, oneOf, optional, ensure} from 'simplecheck';
 ```
 
 ### Check a variable's type
 
 ```js
-var valid = check('foo', String);
+var valid = matches('foo', String);
 console.log(valid); // true
 ```
 
 ### Use `oneOf`
 ```js
-var valid = check('foo', oneOf(String, Number));
+var valid = matches('foo', oneOf(String, Number));
 console.log(valid); // true
 
-valid = check('foo', oneOf(Number, Boolean));
+valid = matches('foo', oneOf(Number, Boolean));
 console.log(valid); // false
 ```
 
 ### Check an object's schema
 ```js
-var valid = check({
+var valid = matches({
   foo:'bar',
   baz:10
 }, {
@@ -47,7 +47,7 @@ console.log(valid); // true
 (if they exist, they must match, but they aren't required)
 
 ```js
-var valid = check({
+var valid = matches({
   foo:'bar',
   baz:10
 }, {
@@ -56,7 +56,7 @@ var valid = check({
 });
 console.log(valid); // true
 
-valid = check({
+valid = matches({
   foo:'bar'
 }, {
   foo:String,
@@ -64,7 +64,7 @@ valid = check({
 });
 console.log(valid); // true
 
-valid = check({
+valid = matches({
   foo:'bar',
   baz:'baz'
 }, {
@@ -79,13 +79,13 @@ console.log(valid); // false ("baz" is not a number)
 Note that this library doesn't support type-checking of elements at specific indices in the array (yet)
 
 ```js
-var valid = check(['foo'], [String]);
+var valid = matches(['foo'], [String]);
 console.log(valid); // true
 
-valid = check(['foo', 10], [String]);
+valid = matches(['foo', 10], [String]);
 console.log(valid); // false
 
-valid = check(['foo', 10], [oneOf(String, Number)]);
+valid = matches(['foo', 10], [oneOf(String, Number)]);
 console.log(valid); // true
 ```
 
@@ -93,7 +93,7 @@ console.log(valid); // true
 Use `ensure`:
 
 ```js
-ensure(check('foo', Number));
+ensure('foo', Number);
 
 // "MatchError: Expected 'foo' to be a number"
 ```
