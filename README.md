@@ -3,7 +3,6 @@ simplecheck
 
 This is a simple variable type-checking library inspired by the `check` and `Match` functions and behaviors in MeteorJS.
 
-Note that this is written with ES6. You can use it for projects deployed to ES5 environments but you need to transpile it using Babel in your build process.
 
 ## Why?
 I love Meteor's `check` function but you can't use it outside of Meteor due to the way it is written, and I want to use it in my pure node projects.
