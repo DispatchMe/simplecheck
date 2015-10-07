@@ -17,60 +17,57 @@ import {matches, oneOf, optional, ensure} from 'simplecheck';
 ### Check a variable's type
 
 ```js
-var valid = matches('foo', String);
-console.log(valid); // true
+matches('foo', String); // true
 ```
 
 ### Use `oneOf`
 ```js
-var valid = matches('foo', oneOf(String, Number));
-console.log(valid); // true
+matches('foo', oneOf(String, Number)); // true
 
-valid = matches('foo', oneOf(Number, Boolean));
-console.log(valid); // false
+matches('foo', oneOf(Number, Boolean)); // false
+
+matches('foo', oneOf('foo', 'bar')); // true
+
 ```
 
 ### Check an object's schema
 ```js
-var valid = matches({
+matches({
   foo:'bar',
   baz:10
 }, {
   foo:String,
   baz:Number
-});
-console.log(valid); // true
+}); // true
+
 ```
 
-### Use the `optional` function for optional keys 
+### Use the `optional` function for optional keys
 (if they exist, they must match, but they aren't required)
 
 ```js
-var valid = matches({
+matches({
   foo:'bar',
   baz:10
 }, {
   foo:String,
   baz:optional(Number)
-});
-console.log(valid); // true
+}); // true
 
-valid = matches({
+matches({
   foo:'bar'
 }, {
   foo:String,
   baz:optional(Number)
-});
-console.log(valid); // true
+}); // true
 
-valid = matches({
+matches({
   foo:'bar',
   baz:'baz'
 }, {
   foo:String,
   baz:optional(Number)
-});
-console.log(valid); // false ("baz" is not a number)
+}); // false ("baz" is not a number)
 ```
 
 ### Check for array of type
@@ -78,14 +75,11 @@ console.log(valid); // false ("baz" is not a number)
 Note that this library doesn't support type-checking of elements at specific indices in the array (yet)
 
 ```js
-var valid = matches(['foo'], [String]);
-console.log(valid); // true
+matches(['foo'], [String]); // true
 
-valid = matches(['foo', 10], [String]);
-console.log(valid); // false
+matches(['foo', 10], [String]); // false
 
-valid = matches(['foo', 10], [oneOf(String, Number)]);
-console.log(valid); // true
+matches(['foo', 10], [oneOf(String, Number)]); // true
 ```
 
 ### Throw an error instead of returning a boolean?
@@ -99,7 +93,3 @@ ensure('foo', Number);
 
 ## Find a bug?
 Please add a test in `check_test.js` and we will try to fix.
-
-
-
-

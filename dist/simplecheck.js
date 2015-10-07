@@ -115,7 +115,7 @@ function oneOf() {
         return true;
       } catch (err) {}
     }
-    throw new new MatchError('Expected %s to be one of %s', JSON.stringify(value), JSON.stringify(args))();
+    throw new MatchError('Expected %s to be one of %s', JSON.stringify(value), JSON.stringify(args));
   };
 }
 
@@ -167,6 +167,10 @@ function checkType(value, pattern) {
   } else if (pattern instanceof Object && nativeTypes.indexOf(pattern) < 0) {
     valid = checkObject(value, pattern, strict);
   } else {
+    // Could be a oneOf with exact values
+    if (value === pattern) {
+      return true;
+    }
     if (!(value instanceof pattern)) {
       throw new MatchError('Expected %s to be an instance of %s', JSON.stringify(value), JSON.stringify(pattern));
     }
@@ -206,7 +210,7 @@ function checkObject(value, pattern) {
   if (strict) {
     for (var k in value) {
       if (!pattern[k]) {
-        throw new new MatchError('Unknown key %s in %s', k, JSON.stringify(value))();
+        throw new MatchError('Unknown key %s in %s', k, JSON.stringify(value));
       }
     }
   }
