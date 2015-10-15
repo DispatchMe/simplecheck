@@ -164,16 +164,22 @@ function checkType(value, pattern) {
     valid = pattern(value);
   } else if (pattern instanceof Array && nativeTypes.indexOf(pattern) < 0) {
     valid = checkArray(value, pattern[0]);
+  } else if (pattern instanceof RegExp && nativeTypes.indexOf(pattern) < 0) {
+    if (!pattern.test(value)) {
+      throw new MatchError('Expected %s to match pattern %s', JSON.stringify(value), pattern);
+    }
   } else if (pattern instanceof Object && nativeTypes.indexOf(pattern) < 0) {
     valid = checkObject(value, pattern, strict);
   } else {
     // Could be a oneOf with exact values
     if (value === pattern) {
       return true;
-    }
-    if (!(value instanceof pattern)) {
+    } else if (!(value instanceof pattern)) {
       throw new MatchError('Expected %s to be an instance of %s', JSON.stringify(value), JSON.stringify(pattern));
     }
+  }
+  if (!valid) {
+    throw new MatchError('Invalid match (%s expected to be %s)', JSON.stringify(value), JSON.stringify(pattern));
   }
   return valid;
 }

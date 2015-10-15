@@ -82,6 +82,21 @@ matches(['foo', 10], [String]); // false
 matches(['foo', 10], [oneOf(String, Number)]); // true
 ```
 
+### Check on a regular expression
+```js
+matches('foo', /^foo$/g); // true
+
+matches('foo', oneOf('bar', /fo/g)); // true
+
+matches('foo', /bar/g); // false
+
+matches({
+  foo:'bar'
+}, {
+  foo:/ba/g
+}); // true
+```
+
 ### Throw an error instead of returning a boolean?
 Use `ensure`:
 

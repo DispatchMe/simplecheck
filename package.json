@@ -1,6 +1,6 @@
 {
   "name": "simplecheck",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Simple variable type checker modeled after Meteor's check function",
   "main": "dist/simplecheck.js",
   "scripts": {
@@ -14,7 +14,7 @@
   },
   "author": "Jason Raede",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "babel": "^5.8.23",
     "chai": "^3.3.0",
     "expect": "^1.11.1",
