@@ -11,7 +11,7 @@ I love Meteor's `check` function but you can't use it outside of Meteor due to t
 ### Import the library
 
 ```js
-import {matches, oneOf, optional, ensure} from 'simplecheck';
+import {matches, oneOf, optional, ensure, anything} from 'simplecheck';
 ```
 
 ### Check a variable's type
@@ -29,6 +29,8 @@ matches('foo', oneOf(Number, Boolean)); // false
 matches('foo', oneOf('foo', 'bar')); // true
 
 ```
+
+
 
 ### Check an object's schema
 ```js
@@ -96,6 +98,15 @@ matches({
   foo:/ba/g
 }); // true
 ```
+
+### Accept `anything`
+```js
+matches('foo', anything); // true
+matches({
+  foo:'bar'
+}, {
+  foo:anything
+}); // true
 
 ### Throw an error instead of returning a boolean?
 Use `ensure`:
