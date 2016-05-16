@@ -1,6 +1,6 @@
 {
   "name": "simplecheck",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Simple variable type checker modeled after Meteor's check function",
   "main": "dist/simplecheck.js",
   "scripts": {

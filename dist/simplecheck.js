@@ -197,7 +197,7 @@ function checkType(value, pattern) {
 function checkArray(arr, pattern) {
   var strict = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
 
-  if (!arr instanceof Array) {
+  if (!(arr instanceof Array)) {
     throw new MatchError('Expected %s to be an array', JSON.stringify(arr));
   }
 
@@ -218,8 +218,7 @@ function checkObject(value, pattern) {
     try {
       checkType(value[k], pattern[k]);
     } catch (err) {
-      err.message = '(Key ' + k + ' in ' + JSON.stringify(value) + ') - ' + err.message;
-      throw err;
+      throw new MatchError('(Key ' + k + ' in ' + JSON.stringify(value) + ') - ' + err.message);
     }
   }
 
